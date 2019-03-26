@@ -23,10 +23,10 @@ public class SimpleAuthoritiesExtractor implements AuthoritiesExtractor {
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
         return Optional.ofNullable((List<String>) map.get(oauth2AuthoritiesAttribute))
-            .filter(it -> !it.isEmpty())
-            .orElse(Collections.singletonList(AuthoritiesConstants.USER))
-            .stream()
-            .map(role -> new SimpleGrantedAuthority(role))
-            .collect(toList());
+                       .filter(it -> !it.isEmpty())
+                       .orElse(Collections.singletonList(AuthoritiesConstants.USER))
+                       .stream()
+                       .map(role -> new SimpleGrantedAuthority(role))
+                       .collect(toList());
     }
 }

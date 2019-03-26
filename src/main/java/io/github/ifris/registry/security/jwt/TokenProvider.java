@@ -2,10 +2,18 @@ package io.github.ifris.registry.security.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +25,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import io.github.jhipster.config.JHipsterProperties;
-import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
@@ -42,28 +49,37 @@ public class TokenProvider {
 
     @PostConstruct
     public void init() {
-        byte[] keyBytes;
         String secret = jHipsterProperties.getSecurity().getAuthentication().getJwt().getSecret();
-        if (!StringUtils.isEmpty(secret)) {
-            log.warn("Warning: the JWT key used is not Base64-encoded. " +
-                "We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security.");
+        String base64secret = jHipsterProperties.getSecurity().getAuthentication().getJwt().getBase64Secret();
+        byte[] keyBytes;
+        if (StringUtils.isEmpty(base64secret)) {
+            log.info("The JWT key used is not Base64-encoded. " +
+                         "We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security.");
+
+            if (StringUtils.isEmpty(secret)) {
+                log.error("\n----------------------------------------------------------\n" +
+                              "Your JWT secret key is not set up, you will not be able to log into the JHipster.\n"+
+                              "Please read the documentation at https://www.jhipster.tech/jhipster-registry/\n" +
+                              "----------------------------------------------------------");
+                throw new RuntimeException("No JWT secret key is configured, the application cannot start.");
+            }
             keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         } else {
             log.debug("Using a Base64-encoded JWT secret key");
-            keyBytes = Decoders.BASE64.decode(jHipsterProperties.getSecurity().getAuthentication().getJwt().getBase64Secret());
+            keyBytes = Decoders.BASE64.decode(base64secret);
         }
         this.key = Keys.hmacShaKeyFor(keyBytes);
         this.tokenValidityInMilliseconds =
             1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
         this.tokenValidityInMillisecondsForRememberMe =
             1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt()
-                .getTokenValidityInSecondsForRememberMe();
+                                     .getTokenValidityInSecondsForRememberMe();
     }
 
     public String createToken(Authentication authentication, boolean rememberMe) {
         String authorities = authentication.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.joining(","));
+                                           .map(GrantedAuthority::getAuthority)
+                                           .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
         Date validity;
@@ -74,23 +90,23 @@ public class TokenProvider {
         }
 
         return Jwts.builder()
-            .setSubject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
-            .signWith(key, SignatureAlgorithm.HS512)
-            .setExpiration(validity)
-            .compact();
+                   .setSubject(authentication.getName())
+                   .claim(AUTHORITIES_KEY, authorities)
+                   .signWith(key, SignatureAlgorithm.HS512)
+                   .setExpiration(validity)
+                   .compact();
     }
 
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts.parser()
-            .setSigningKey(key)
-            .parseClaimsJws(token)
-            .getBody();
+                            .setSigningKey(key)
+                            .parseClaimsJws(token)
+                            .getBody();
 
         Collection<? extends GrantedAuthority> authorities =
             Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                  .map(SimpleGrantedAuthority::new)
+                  .collect(Collectors.toList());
 
         User principal = new User(claims.getSubject(), "", authorities);
 
