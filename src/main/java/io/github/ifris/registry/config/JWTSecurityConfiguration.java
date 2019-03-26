@@ -44,12 +44,9 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final String[] roles;
 
-    public JWTSecurityConfiguration(@Value("${spring.security.user.name}") String username,
-                                    @Value("${spring.security.user.password}") String password,
-                                    @Value("${spring.security.user.roles}") String[] roles,
-                                    AuthenticationManagerBuilder authenticationManagerBuilder,
-                                    Http401UnauthorizedEntryPoint authenticationEntryPoint,
-                                    TokenProvider tokenProvider) {
+    public JWTSecurityConfiguration(@Value("${spring.security.user.name}") String username, @Value("${spring.security.user.password}") String password,
+                                    @Value("${spring.security.user.roles}") String[] roles, AuthenticationManagerBuilder authenticationManagerBuilder,
+                                    Http401UnauthorizedEntryPoint authenticationEntryPoint, TokenProvider tokenProvider) {
         this.username = username;
         this.password = password;
         this.roles = roles;
@@ -61,9 +58,7 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @PostConstruct
     public void init() {
         try {
-            authenticationManagerBuilder
-                .userDetailsService(userDetailsService())
-                .passwordEncoder(passwordEncoder());
+            authenticationManagerBuilder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
@@ -83,27 +78,18 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(
-            User.withUsername(username)
-                .password(passwordEncoder().encode(password))
-                .roles(roles)
-                .build());
+        manager.createUser(User.withUsername(username).password(passwordEncoder().encode(password)).roles(roles).build());
         return manager;
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-           .antMatchers(HttpMethod.OPTIONS, "/**")
-           .antMatchers("/app/**/*.{js,html}")
-           .antMatchers("/swagger-ui/**")
-           .antMatchers("/content/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").antMatchers("/app/**/*.{js,html}").antMatchers("/swagger-ui/**").antMatchers("/content/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .exceptionHandling()
+        http.exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)
             .and()
             .csrf()
