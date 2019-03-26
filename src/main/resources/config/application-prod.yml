@@ -37,6 +37,11 @@ spring:
         port: 25
         username:
         password:
+    security:
+            user:
+                name: admin
+                password: admin
+                role: USER,ADMIN
     thymeleaf:
         cache: true
     sleuth:
@@ -82,11 +87,6 @@ server:
 # ===================================================================
 
 jhipster:
-    gateway:
-        rate-limiting:
-            enabled: false
-        authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
-            app1: /api # recommended prod configuration
     http:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
         cache: # Used by the CachingHttpHeadersFilter

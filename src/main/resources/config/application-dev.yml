@@ -59,6 +59,11 @@ spring:
         locator:
             discovery:
                 enabled: true
+    security:
+        user:
+          name: admin
+          password: admin
+          roles: USER, ADMIN
 
 server:
     port: 8761
@@ -70,13 +75,6 @@ server:
 # ===================================================================
 
 jhipster:
-    gateway:
-        rate-limiting:
-            enabled: false
-            limit: 100000
-            duration-in-seconds: 3600
-        authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
-            app1: /api,/v2/api-docs # recommended dev configuration
     http:
         version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
     cache: # Cache configuration
@@ -104,7 +102,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: JHipsterRegistry@localhost
+        from: IFRISRegistry@localhost
         base-url: http://127.0.0.1:8761
     metrics:
         logs: # Reports metrics in the logs

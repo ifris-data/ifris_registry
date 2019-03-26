@@ -15,16 +15,8 @@
 # ===================================================================
 
 eureka:
-    client:
-        enabled: true
-        healthcheck:
-            enabled: true
-        fetch-registry: true
-        register-with-eureka: true
-        instance-info-replication-interval-seconds: 10
-        registry-fetch-interval-seconds: 10
     instance:
-        appname: jhipsterregistry
+        appname: ifris-registry
         instanceId: jhipsterregistry:${spring.application.instance-id:${random.value}}
         lease-renewal-interval-in-seconds: 5
         lease-expiration-duration-in-seconds: 10
@@ -37,6 +29,23 @@ eureka:
             git-version: ${git.commit.id.describe:}
             git-commit: ${git.commit.id.abbrev:}
             git-branch: ${git.branch:}
+    client:
+            enabled: true
+            fetch-registry: false
+            register-with-eureka: false
+            instance-info-replication-interval-seconds: 10
+            registry-fetch-interval-seconds: 10
+            service-url:
+                defaultZone: http://admin:${spring.security.user.password:admin}@localhost:${server.port}/eureka/
+        server:
+            # see discussion about enable-self-preservation:
+            # https://github.com/jhipster/generator-jhipster/issues/3654
+            enable-self-preservation: false
+            peer-node-read-timeout-ms: 1000
+        dashboard:
+            path: /registry
+        datacenter: IFRIS-DataCenter
+        environment: IFRIS-Environment
 ribbon:
     eureka:
         enabled: true
@@ -48,6 +57,8 @@ zuul: # those values must be configured depending on the application specific ne
         max-per-route-connections: 100
     semaphore:
         max-semaphores: 500
+    prefix: /services/
+    strip-prefix: true
 
 # See https://github.com/Netflix/Hystrix/wiki/Configuration
 hystrix:
@@ -105,14 +116,23 @@ management:
 
 spring:
     application:
-        name: IFRIS Registry
+        name: ifris-registry
     messages:
         basename: i18n/messages
     mvc:
         favicon:
             enabled: false
+    security:
+            user:
+                name: admin
+                password: admin
+                roles: USER,ADMIN
     thymeleaf:
         mode: HTML
+server:
+    port: 8761
+logging:
+    file: target/jhipster-registry.log
 
 server:
     servlet:
@@ -147,16 +167,10 @@ jhipster:
     mail:
         from: JHipsterRegistry@localhost
     swagger:
-        default-include-pattern: /api/.*
-        title: JHipsterRegistry API
-        description: JHipsterRegistry API documentation
-        version: 0.0.1
-        terms-of-service-url:
-        contact-name:
-        contact-url:
-        contact-email:
-        license:
-        license-url:
+            default-include-pattern: /(api|config)/.*
+            title: IFRIS Registry API
+            description: IFRIS Registry API documentation
+            version: ${info.project.version}
 
 # ===================================================================
 # Application specific properties
