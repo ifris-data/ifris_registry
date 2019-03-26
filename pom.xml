@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.ifris.registry</groupId>
-    <artifactId>j-hipster-registry</artifactId>
+    <artifactId>ifris-registry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>J Hipster Registry</name>
+    <name>IFRIS Registry</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

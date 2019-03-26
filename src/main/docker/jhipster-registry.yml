@@ -1,3 +1,5 @@
+# This is not require for this application since we are using a custom
+# Registry mechanism
 version: '2'
 services:
     jhipster-registry:
