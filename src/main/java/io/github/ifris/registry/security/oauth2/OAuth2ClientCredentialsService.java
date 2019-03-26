@@ -21,7 +21,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 import java.util.Objects;
 
-import static io.github.jhipster.registry.config.Constants.PROFILE_UAA;
+import static io.github.ifris.registry.config.Constants.PROFILE_UAA;
+
 
 @Service
 @Profile(PROFILE_UAA)

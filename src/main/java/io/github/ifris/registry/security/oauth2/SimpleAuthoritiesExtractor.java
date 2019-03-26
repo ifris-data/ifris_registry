@@ -1,6 +1,6 @@
 package io.github.ifris.registry.security.oauth2;
 
-import io.github.jhipster.registry.security.AuthoritiesConstants;
+import io.github.ifris.registry.security.AuthoritiesConstants;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
