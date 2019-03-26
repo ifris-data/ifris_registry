@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import static io.github.ifris.registry.config.Constants.PROFILE_UAA;
-import static io.github.ifris.registry.security.jwt.JWTFilter.AUTHORIZATION_HEADER;
+import static io.github.ifris.registry.filters.OAuth2TokenRelayFilter.AUTHORIZATION_HEADER;
 
 
 @Component
@@ -49,7 +49,7 @@ public class UaaTokenRelayFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         // Add specific authorization headers for OAuth2
         ctx.addZuulRequestHeader(AUTHORIZATION_HEADER,
-            "Bearer " + oauth2clientCredentialsService.getAccessToken());
+                                 "Bearer " + oauth2clientCredentialsService.getAccessToken());
 
         return null;
     }

@@ -1,6 +1,7 @@
 package io.github.ifris.registry.config;
 
 import io.github.ifris.registry.security.AuthoritiesConstants;
+import io.github.ifris.registry.security.Http401UnauthorizedEntryPoint;
 import io.github.ifris.registry.security.jwt.JWTConfigurer;
 import io.github.ifris.registry.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
@@ -93,10 +94,10 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-            .antMatchers(HttpMethod.OPTIONS, "/**")
-            .antMatchers("/app/**/*.{js,html}")
-            .antMatchers("/swagger-ui/**")
-            .antMatchers("/content/**");
+           .antMatchers(HttpMethod.OPTIONS, "/**")
+           .antMatchers("/app/**/*.{js,html}")
+           .antMatchers("/swagger-ui/**")
+           .antMatchers("/content/**");
     }
 
     @Override
@@ -104,19 +105,19 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)
-        .and()
+            .and()
             .csrf()
             .disable()
             .headers()
             .frameOptions()
             .disable()
-        .and()
+            .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-         .and()
+            .and()
             .httpBasic()
             .realmName("JHipster Registry")
-        .and()
+            .and()
             .authorizeRequests()
             .antMatchers("/eureka/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/config/**").hasAuthority(AuthoritiesConstants.ADMIN)
@@ -130,7 +131,7 @@ public class JWTSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/*").permitAll()
             .anyRequest().authenticated()
-        .and()
+            .and()
             .apply(securityConfigurerAdapter());
     }
 

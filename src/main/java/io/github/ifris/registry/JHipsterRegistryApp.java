@@ -1,6 +1,7 @@
 package io.github.ifris.registry;
 
 import io.github.ifris.registry.config.ApplicationProperties;
+import io.github.ifris.registry.config.ConfigServerConfig;
 import io.github.ifris.registry.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
@@ -12,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.core.env.Environment;
 
@@ -21,8 +24,10 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
+@EnableEurekaServer
+@EnableConfigServer
 @SpringBootApplication
-@EnableConfigurationProperties({ApplicationProperties.class})
+@EnableConfigurationProperties({ApplicationProperties.class, ConfigServerConfig.class})
 @EnableDiscoveryClient
 @EnableZuulProxy
 public class JHipsterRegistryApp {
