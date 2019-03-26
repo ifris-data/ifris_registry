@@ -25,8 +25,8 @@ security:
         client:
             access-token-uri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/token
             user-authorization-uri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/auth
-            client-id: jhipster-registry
-            client-secret: jhipster-registry
+            client-id: ifris-registry
+            client-secret: ifris-registry
             client-authentication-scheme: form
             scope: openid profile email
         resource:

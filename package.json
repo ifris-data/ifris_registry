@@ -1,9 +1,9 @@
 {
-    "name": "j-hipster-registry",
-    "version": "0.0.0",
-    "description": "Description for JHipsterRegistry",
+    "name": "ifris-registry",
+    "version": "0.0.1",
+    "description": "JHipster service registry, made with Netflix Eureka and Spring Cloud Config",
     "private": true,
-    "license": "UNLICENSED",
+    "license": "MIT",
     "cacheDirectories": [
         "node_modules"
     ],
@@ -45,7 +45,6 @@
         "browser-sync": "2.26.3",
         "browser-sync-webpack-plugin": "2.2.2",
         "cache-loader": "2.0.1",
-        "codelyzer": "4.5.0",
         "copy-webpack-plugin": "4.6.0",
         "css-loader": "2.1.0",
         "file-loader": "3.0.1",
