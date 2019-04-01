@@ -1,7 +1,7 @@
 {
   "generator-jhipster": {
     "jhipsterVersion": "5.8.2",
-    "baseName": "JHipsterRegistry",
+    "baseName": "IfrisRegistry",
     "packageName": "io.github.ifris.registry",
     "packageFolder": "io/github/ifris/registry",
     "serverPort": "8761",
@@ -25,7 +25,7 @@
     "jhiPrefix": "ifris",
     "skipClient": false,
     "skipUserManagement": false,
-    "clientPackageManager": "npm",
+    "clientPackageManager": "yarn",
     "clientFramework": "angularX",
     "cacheProvider": "hazelcast",
     "enableHibernateCache": false,
