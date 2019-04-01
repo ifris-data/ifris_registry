@@ -38,6 +38,8 @@
         <profile.swagger />
         <profile.tls />
 
+        <docker.image.prefix>ifris</docker.image.prefix>
+
         <!-- Dependency versions -->
         <jhipster-dependencies.version>2.1.1</jhipster-dependencies.version>
         <!-- The spring-boot version should match the one managed by
@@ -472,7 +474,7 @@
                           <image>openjdk:8-jre-alpine</image>
                       </from>
                       <to>
-                          <image>jhipsterregistry:latest</image>
+                          <image>${docker.image.prefix}/${project.artifactId}</image>
                       </to>
                       <container>
                           <entrypoint>
