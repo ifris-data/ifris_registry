@@ -32,6 +32,8 @@ import java.util.Collection;
 @EnableZuulProxy
 public class JHipsterRegistryApp {
 
+    //TODO change to IfrisRegistryApp
+
     private static final Logger log = LoggerFactory.getLogger(JHipsterRegistryApp.class);
 
     private final Environment env;
