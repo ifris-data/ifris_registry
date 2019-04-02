@@ -38,7 +38,7 @@
         <profile.swagger />
         <profile.tls />
 
-        <docker.image.prefix>ghacupha/ifris-registry</docker.image.prefix>
+        <docker.image.prefix>ghacupha</docker.image.prefix>
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>2.1.1</jhipster-dependencies.version>
@@ -475,7 +475,7 @@
                           <image>openjdk:8-jre-alpine</image>
                       </from>
                       <to>
-                          <image>${docker.image.prefix}/${project.artifactId}</image>
+                          <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
                       </to>
                       <container>
                           <entrypoint>
