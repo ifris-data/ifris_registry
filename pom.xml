@@ -38,6 +38,8 @@
         <profile.swagger />
         <profile.tls />
 
+        <docker.image.prefix>ghacupha</docker.image.prefix>
+
         <!-- Dependency versions -->
         <jhipster-dependencies.version>2.1.1</jhipster-dependencies.version>
         <!-- The spring-boot version should match the one managed by
@@ -366,6 +368,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -472,7 +475,7 @@
                           <image>openjdk:8-jre-alpine</image>
                       </from>
                       <to>
-                          <image>jhipsterregistry:latest</image>
+                          <image>${docker.image.prefix}\ifris-registry:latest</image>
                       </to>
                       <container>
                           <entrypoint>

@@ -30,15 +30,15 @@ import java.util.Collection;
 @EnableConfigurationProperties({ApplicationProperties.class, ConfigServerConfig.class})
 @EnableDiscoveryClient
 @EnableZuulProxy
-public class JHipsterRegistryApp {
+public class IfrisRegistryApp {
 
     //TODO change to IfrisRegistryApp
 
-    private static final Logger log = LoggerFactory.getLogger(JHipsterRegistryApp.class);
+    private static final Logger log = LoggerFactory.getLogger(IfrisRegistryApp.class);
 
     private final Environment env;
 
-    public JHipsterRegistryApp(Environment env) {
+    public IfrisRegistryApp(Environment env) {
         this.env = env;
     }
 
@@ -68,7 +68,7 @@ public class JHipsterRegistryApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(JHipsterRegistryApp.class);
+        SpringApplication app = new SpringApplication(IfrisRegistryApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);

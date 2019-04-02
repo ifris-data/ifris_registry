@@ -1,7 +1,7 @@
 package io.github.jhipster.registry.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.ifris.registry.JHipsterRegistryApp;
+import io.github.ifris.registry.IfrisRegistryApp;
 import io.github.ifris.registry.security.jwt.TokenProvider;
 import io.github.ifris.registry.web.rest.UserJWTController;
 import io.github.ifris.registry.web.rest.vm.LoginVM;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = JHipsterRegistryApp.class)
+@SpringBootTest(classes = IfrisRegistryApp.class)
 public class UserJWTControllerTest {
 
     @Autowired
