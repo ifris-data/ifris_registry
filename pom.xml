@@ -38,7 +38,7 @@
         <profile.swagger />
         <profile.tls />
 
-        <docker.image.prefix>ifris</docker.image.prefix>
+        <docker.image.prefix>docker.io/ghacupha</docker.image.prefix>
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>2.1.1</jhipster-dependencies.version>
