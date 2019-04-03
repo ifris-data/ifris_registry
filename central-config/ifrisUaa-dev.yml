@@ -17,7 +17,7 @@ logging:
     level:
         ROOT: DEBUG
         io.github.jhipster: DEBUG
-        io.github.ifris.auth: DEBUG
+        io.github.ifris.uaa: DEBUG
 
 eureka:
     instance:
@@ -74,7 +74,7 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-            hibernate.cache.hazelcast.instance_name: ifrisUaa
+            hibernate.cache.hazelcast.instance_name: ifrisuaa
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
     data:
@@ -136,7 +136,7 @@ jhipster:
             client-id: internal
             client-secret: internal
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: ifrisUaa@localhost
+        from: ifrisuaa@localhost
         base-url: http://127.0.0.1:8080
     metrics:
         logs: # Reports metrics in the logs
