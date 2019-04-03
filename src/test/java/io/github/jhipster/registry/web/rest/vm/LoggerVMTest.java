@@ -46,7 +46,7 @@ public class LoggerVMTest {
 
         Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         vm = new LoggerVM(logger);
-        assertEquals(Level.ERROR.toString(), vm.getLevel());
+        assertEquals(Level.WARN.toString(), vm.getLevel());
     }
 
     @Test
