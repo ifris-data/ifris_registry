@@ -45,7 +45,7 @@ spring:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
 #        keyStoreType: PKCS12
-#        keyAlias: JHipsterRegistry
+#        keyAlias: IFRISRegistry
 # ===================================================================
 server:
     port: 8761
