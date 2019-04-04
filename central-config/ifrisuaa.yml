@@ -147,7 +147,7 @@ jhipster:
         default-include-pattern: /api/.*
         title: IFRIS UAA API
         description: UAA API documentation
-        version: ${info.project.version}
+        version: 0.0.1-SNAPSHOT
         terms-of-service-url:
         contact-name: Edwin Njeru
         contact-url: https://github.com/ifris-data/ifris_uaa
